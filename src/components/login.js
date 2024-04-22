@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios"
-const Login = () => {
+import axios from "axios";
+import {useNavigate} from "react-router-dom"
+const Login = ({setIsLoggedIn}) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [loading,setLoading] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleChange = (e) => {
@@ -24,6 +26,8 @@ const Login = () => {
             email:"",
             password:""
         })
+        setIsLoggedIn(true)
+        navigate("/upload-image")
       } 
       catch (error) {
         console.error('Error uploading file:', error);

@@ -7,12 +7,12 @@ import About from "./components/about.js"
 import Contact from "./components/contact.js"
 import UploadImage from "./components/uploadImage.js"
 import Feed from "./components/feed.js"
-
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import {useState} from "react"
 
 function App() {
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
+
   return (
     <>
     
@@ -36,11 +36,11 @@ function App() {
           ></Route>
           <Route
             path="/login"
-            element={ <Login />}
+            element={ <Login setIsLoggedIn={setIsLoggedIn} />}
           />
           <Route
             path="/upload-image"
-            element={<UploadImage/>}
+            element={<UploadImage isLoggedIn={isLoggedIn}/>}
           >
           </Route>
           <Route

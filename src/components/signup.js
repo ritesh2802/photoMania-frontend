@@ -1,8 +1,10 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const [selectedFiles, setSelectedFiles] = useState({ avatar: "", coverImage: "" });
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     fullName: '',
@@ -55,7 +57,7 @@ function Signup() {
         password: ''
       })
       setSelectedFiles({ avatar:"", coverImage:"" });
-     
+     navigate("/login")
       
 
     } 

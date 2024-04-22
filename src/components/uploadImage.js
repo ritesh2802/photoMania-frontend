@@ -1,13 +1,11 @@
 // UploadPhoto.js
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 const UploadPhoto = ({ isLoggedIn }) => {
   const [photo, setPhoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-//   const history = useHistory();
-
+  const navigate = useNavigate();
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
     setPhoto(selectedPhoto);
@@ -23,10 +21,11 @@ const UploadPhoto = ({ isLoggedIn }) => {
       // Upload photo
       console.log('Uploading photo:', photo);
       // After successful upload, redirect to another page or show success message
-    //   history.push('/gallery');
+      navigate("/feed")
     } else {
       // Redirect to home page if user is not logged in
-    //   history.push('/');
+      alert("please log in")
+      navigate("/home")
     }
   };
 
