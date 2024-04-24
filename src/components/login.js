@@ -18,7 +18,7 @@ const Login = ({setIsLoggedIn}) => {
     e.preventDefault();
     // Handle form submission here
     try {
-        const response = await axios.post('http://localhost:8000/api/v1/users/login', formData);
+        const response = await axios.post('/api/v1/users/login', formData);
         console.log(response.data);
         setLoading(true)
         // alert(response.data.message)

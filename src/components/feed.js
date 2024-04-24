@@ -9,7 +9,7 @@ const Feed = () => {
     // Fetch photos data from the backend API
     const fetchPhotos = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/photos/receive');
+        const response = await axios.get('/api/v1/photos/receive');
         console.log(response.data.data)
         
        
