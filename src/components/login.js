@@ -21,13 +21,13 @@ const Login = ({setIsLoggedIn}) => {
         const response = await axios.post('http://localhost:8000/api/v1/users/login', formData);
         console.log(response.data);
         setLoading(true)
-        alert(response.data.message)
+        // alert(response.data.message)
         setFormData({
             email:"",
             password:""
         })
         setIsLoggedIn(true)
-        navigate("/upload-image")
+        // navigate("/upload-image")
       } 
       catch (error) {
         console.error('Error uploading file:', error);

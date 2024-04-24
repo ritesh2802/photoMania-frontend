@@ -15,7 +15,7 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Render featured photos here */}
           <div className="rounded-lg overflow-hidden shadow-md">
-            <img className="w-full" src="" alt="Featured" />
+            <img className="w-full" src="https://via.placeholder.com/150" alt="Featured" />
           </div>
           <div className="rounded-lg overflow-hidden shadow-md">
             <img className="w-full" src="https://via.placeholder.com/150" alt="Featured" />

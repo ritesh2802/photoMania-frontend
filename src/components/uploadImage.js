@@ -2,12 +2,16 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
 const UploadPhoto = ({ isLoggedIn }) => {
   const [photo, setPhoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const navigate = useNavigate();
+  console.log(isLoggedIn)
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
+    console.log(selectedPhoto)
     setPhoto(selectedPhoto);
     if (selectedPhoto) {
       const url = URL.createObjectURL(selectedPhoto);
@@ -15,13 +19,27 @@ const UploadPhoto = ({ isLoggedIn }) => {
     }
   };
 
-  const handleUpload = () => {
+  const data = new FormData();
+  data.append('photoFile', photo);
+  console.log('Uploading photo:', data);
+
+  const handleUpload = async() => {
     // Perform upload logic
-    if (isLoggedIn && photo) {
+    if (isLoggedIn) {
+      console.log(isLoggedIn)
       // Upload photo
-      console.log('Uploading photo:', photo);
+      
+      // http://localhost:8000/api/v1/photos/upload
+      try {
+        const response = await axios.post("http://localhost:8000/api/v1/photos/upload",data)
+        console.log(response)
+      } catch (error) {
+        alert('Error uploading file:', error);
+        console.log(('Error uploading file:', error))
+        
+      }
       // After successful upload, redirect to another page or show success message
-      navigate("/feed")
+      // navigate("/feed")
     } else {
       // Redirect to home page if user is not logged in
       alert("please log in")

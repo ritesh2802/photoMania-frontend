@@ -31,7 +31,7 @@ const Feed = () => {
       <h1 className="text-4xl font-bold mb-8">Photo Feed</h1>
       <div className="grid grid-cols-3 gap-6">
         {photos.map(photo => (
-          <div key={photo.id} className="bg-gray-100 rounded-md overflow-hidden shadow-md">
+          <div key={photo.title} className="bg-gray-100 rounded-md overflow-hidden shadow-md">
             <img src={photo.photoFile} alt={photo.title} className="w-full h-56 object-cover" />
             <div className="p-4">
               <div className="flex items-center mb-4">
