@@ -31,7 +31,7 @@ const UploadPhoto = ({ isLoggedIn }) => {
       
       // http://localhost:8000/api/v1/photos/upload
       try {
-        const response = await axios.post("http://localhost:8000/api/v1/photos/upload",data)
+        const response = await axios.post("/api/v1/photos/upload",data)
         console.log(response)
       } catch (error) {
         alert('Error uploading file:', error);

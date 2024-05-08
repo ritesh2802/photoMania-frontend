@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
+import api from "./api.js"
 const Login = ({setIsLoggedIn}) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -18,7 +19,15 @@ const Login = ({setIsLoggedIn}) => {
     e.preventDefault();
     // Handle form submission here
     try {
-        const response = await axios.post('/api/v1/users/login', formData);
+      // https://photo-mania-backend.vercel.app/api/v1/users/login
+      // http://localhost:8000/api/v1/users/login
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+          },
+          withCredentials: true
+        }
+        const response = await axios.post('/api/v1/users/login', formData,config);
         console.log(response.data);
         setLoading(true)
         // alert(response.data.message)
@@ -27,7 +36,7 @@ const Login = ({setIsLoggedIn}) => {
             password:""
         })
         setIsLoggedIn(true)
-        // navigate("/upload-image")
+        navigate("/upload-image")
       } 
       catch (error) {
         console.error('Error uploading file:', error);
