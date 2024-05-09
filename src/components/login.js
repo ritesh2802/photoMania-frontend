@@ -27,7 +27,7 @@ const Login = ({setIsLoggedIn}) => {
           },
           withCredentials: true
         }
-        const response = await axios.post('/api/v1/users/login', formData,config);
+        const response = await axios.post('https://photo-mania-backend.vercel.app/api/v1/users/login', formData,config);
         console.log(response.data);
         setLoading(true)
         // alert(response.data.message)
