@@ -44,7 +44,7 @@ function Signup() {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/v1/users/register', data);
+      const response = await axios.post('https://photo-mania-backend.vercel.app/api/v1/users/register', data);
       console.log(response.data);
       // change
 
