@@ -5,7 +5,6 @@ import Login from './components/login.js';
 import Home from "./components/home.js"
 import About from "./components/about.js"
 import Contact from "./components/contact.js"
-import UploadImage from "./components/uploadImage.js"
 import Feed from "./components/feed.js"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {useState} from "react"
@@ -38,11 +37,8 @@ function App() {
             path="/login"
             element={ <Login setIsLoggedIn={setIsLoggedIn} />}
           />
-          <Route
-            path="/upload-image"
-            element={<UploadImage isLoggedIn={isLoggedIn}/>}
-          >
-          </Route>
+
+         
           <Route
             path="/feed"
             element={<Feed/>}

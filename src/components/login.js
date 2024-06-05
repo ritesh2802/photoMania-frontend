@@ -1,42 +1,40 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom"
-import api from "./api.js"
+import { Link } from 'react-router-dom';
+
 const Login = ({setIsLoggedIn}) => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading,setLoading] = useState(false);
-  const navigate = useNavigate();
-
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [user,setUser] = useState();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     // Handle form submission here
     try {
-      // https://photo-mania-backend.vercel.app/api/v1/users/login
       // http://localhost:8000/api/v1/users/login
       const config = {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          // 'Access-Control-Allow-Credentials': true,
           },
-          withCredentials: true
+          withCredentials: true,
+          
+         
         }
-        const response = await axios.post('https://photo-mania-backend.vercel.app/api/v1/users/login', formData,config);
+        // axios.defaults.withCredentials = true;
+        const response = await axios.post('http://localhost:8000/api/v1/users/login',{email,password},config);
         console.log(response.data);
+        
+        setUser(response.data)
+        
         setLoading(true)
         // alert(response.data.message)
-        setFormData({
-            email:"",
-            password:""
-        })
+        setEmail('');
+        setPassword('');
         setIsLoggedIn(true)
-        navigate("/upload-image")
+        // navigate("/feed")
       } 
       catch (error) {
         console.error('Error uploading file:', error);
@@ -44,51 +42,44 @@ const Login = ({setIsLoggedIn}) => {
       finally{
         setLoading(false)
     }
-
+  
   };
+  
 
   return (
-    <>
-      <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-blue-400 to-purple-400 font-sans">
-
-    <div className="max-w-md w-[35%] mx-auto my-[80px] p-6 bg-white rounded-md shadow-md  ">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
-      <form onSubmit={handleSubmit} method="post">
+    <div className="container mx-auto flex justify-center items-center h-screen">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8">
+        <h2 className="text-2xl font-semibold mb-4 text-center">Log In</h2>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
           <input
             type="email"
             id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your email"
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+        <div className="mb-6">
+          <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">Password</label>
           <input
             type="password"
             id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your password"
             required
           />
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">Login</button>
+        <div className="flex items-center justify-between">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Log In</button>
+          <Link to="/signup" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">Sign Up</Link>
+        </div>
       </form>
-     
     </div>
-    </div>
-    
-     {loading && <div className="flex justify-center items-center">
-     <div className="border-4 border-solid border-gray-200 border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
-     </div>
-    }
-    </>
   );
 };
 
